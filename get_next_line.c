@@ -6,7 +6,7 @@
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 17:57:57 by alallema          #+#    #+#             */
-/*   Updated: 2016/03/17 19:07:29 by alallema         ###   ########.fr       */
+/*   Updated: 2016/03/17 19:56:07 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,12 @@ int		get_next_line(const int fd, char **line)
 			ret = ft_strchr(buf, '\n');
 			ret++;
 			*line = ft_strjoin(*line, ft_clean_buf(buf));
-//			ft_putstr(*line);
-//			ft_putchar('\n');
-//			ft_putstr(ret);
-//			get_next_line(fd, &ret);
+			ft_putstr(*line);
 			return (1);
 		}
-		if (ret)
-		{
-			*line = ft_clean_buf(ret);
-			ret = ft_strchr(ret, '\n');
-			ret++;
-		}
+		*line = ft_clean_buf(ret);
+		ret = ft_strchr(ret, '\n');
+		ret++;
 	}
 //	ft_putstr(*line);
 //	ft_putnbr(r);
