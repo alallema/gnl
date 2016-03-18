@@ -6,7 +6,7 @@
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:03:40 by alallema          #+#    #+#             */
-/*   Updated: 2016/03/17 18:33:18 by alallema         ###   ########.fr       */
+/*   Updated: 2016/03/18 19:22:29 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ int	main(int ac, char **av)
 		ft_putstr("erreur fd");
 		return (1);
 	}
-	line = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+//	line = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
 	while ((get = get_next_line(fd, &line)) > 0)
 	{
-		ft_putstr(line);
+//		ft_putstr(line);
+		ft_putchar('\n');
 		ft_putnbr(get);
 	}
-	close(fd);
+	ft_putchar('\n');
+//	ft_putstr(line);
+	ft_putnbr(get);
+//	close(fd);
 	return (0);
 }

@@ -5,61 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/09 17:57:57 by alallema          #+#    #+#             */
-/*   Updated: 2016/03/17 19:56:07 by alallema         ###   ########.fr       */
+/*   Created: 2016/03/18 17:14:56 by alallema          #+#    #+#             */
+/*   Updated: 2016/03/18 19:23:20 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft.h"
 
-char	*ft_clean_buf(char *buf)
+char	*ft_clean(char *s)
 {
 	int i;
 
 	i = 0;
-	while (i < BUFF_SIZE && buf[i] != '\n')
+	while (s[i] && s[i] != '\n')
 		i++;
-	buf[i] = '\0';
-	return (buf);
+	while (s[i])
+	{
+		s[i] = '\0';
+		i++;
+	}
+	return(s);
 }
 
-int		get_next_line(const int fd, char **line)
+char	*ft_strcchr(char *s)
 {
-	char		buf[BUFF_SIZE];
-	static char	*tmp;
-	int		ret;
+	int i;
 
-	tmp = NULL;
-	if (fd == -1)
-		return (-1);
-//	tmp = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
-//	ret = ft_strnew((size_t) BUFF_SIZE);
+	i = 0;
+	while(s[i] != '\n' && s[i])
+		i++;
+	i++;
+		return(&s[i]);
+}
+
+int	get_next_line(const int fd, char **line)
+{
+	char		buf[BUFF_SIZE + 1];
+	static char	*tmp;
+	int			ret;
+	char		*s;
+
 	if (!tmp)
+		tmp = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if (fd == -1)
+		return(-1);
+	if (ft_strchr(tmp, '\n'))
 	{
-		if (!ft_strchr(tmp, '\n'))
-		{
-			tmp = ft_strchr(tmp, '\n');
-			return(1);
-		}
-		else
-			
+		ft_putchar('t');
+		ft_putchar('\n');
+		*line = ft_strdup(ft_clean(tmp));
+		tmp = ft_strcchr(tmp);
+		return (1);
 	}
-	while (read(fd, &buf, BUFF_SIZE))
+	while ((ret = read (fd, &buf, BUFF_SIZE)) != 0)
 	{
-		if (ft_strchr(buf, '\n') == NULL)
+		buf[ret] = '\0';
+//		tmp = ft_strjoin(tmp, buf);
+		if (!ft_strchr(buf, '\n'))
 		{
-			*line = ft_strjoin(*line, buf);
+			ft_putchar('a');
+			ft_putchar('\n');
+			tmp = ft_strjoin(tmp, buf);
+//			ft_putstr(tmp);
 		}
-		if (ft_strchr(buf, '\n') != NULL)
+		if (ft_strchr(buf, '\n'))
 		{
-			tmp = ft_strchr(buf, '\n');
-			*line = ft_strjoin(*line, ft_clean_buf(buf));
+			ft_putstr(buf);
+			ft_putchar('b');
+			ft_putchar('\n');
+			*line = ft_strjoin(tmp, ft_clean(buf));
+			tmp = ft_strdup(ft_strcchr(buf));
+//			ft_putstr(tmp);
 			return (1);
 		}
-		*line = ft_clean_buf(tmp);
-		tmp = ft_strchr(tmp, '\n');
-		tmp++;
 	}
-	return (0);
+	return(0);
 }
