@@ -26,13 +26,25 @@ char	*ft_clean_buf(char *buf)
 
 int		get_next_line(const int fd, char **line)
 {
-	char buf[BUFF_SIZE];
-	static char *ret;
+	char		buf[BUFF_SIZE];
+	static char	*tmp;
+	int		ret;
 
+	tmp = NULL;
 	if (fd == -1)
 		return (-1);
-//	ret = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+//	tmp = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
 //	ret = ft_strnew((size_t) BUFF_SIZE);
+	if (!tmp)
+	{
+		if (!ft_strchr(tmp, '\n'))
+		{
+			tmp = ft_strchr(tmp, '\n');
+			return(1);
+		}
+		else
+			
+	}
 	while (read(fd, &buf, BUFF_SIZE))
 	{
 		if (ft_strchr(buf, '\n') == NULL)
@@ -41,17 +53,13 @@ int		get_next_line(const int fd, char **line)
 		}
 		if (ft_strchr(buf, '\n') != NULL)
 		{
-			ret = ft_strchr(buf, '\n');
-			ret++;
+			tmp = ft_strchr(buf, '\n');
 			*line = ft_strjoin(*line, ft_clean_buf(buf));
-			ft_putstr(*line);
 			return (1);
 		}
-		*line = ft_clean_buf(ret);
-		ret = ft_strchr(ret, '\n');
-		ret++;
+		*line = ft_clean_buf(tmp);
+		tmp = ft_strchr(tmp, '\n');
+		tmp++;
 	}
-//	ft_putstr(*line);
-//	ft_putnbr(r);
 	return (0);
 }

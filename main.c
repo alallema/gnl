@@ -22,12 +22,22 @@ int	main(int ac, char **av)
 	char *line;
 	int get;
 
+	if (ac < 2)
+	{
+		ft_putstr("erreur");
+	}
 	fd = open(av[1], O_RDONLY);
-//	while (get_next_line(fd, &line) == 1)
+	if (fd == -1)
+	{
+		ft_putstr("erreur fd");
+		return (1);
+	}
 	line = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
-	get = get_next_line(fd, &line);
-	if (ac == 2)
+	while ((get = get_next_line(fd, &line)) > 0)
+	{
+		ft_putstr(line);
 		ft_putnbr(get);
+	}
 	close(fd);
 	return (0);
 }
