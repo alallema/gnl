@@ -6,7 +6,7 @@
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 17:14:56 by alallema          #+#    #+#             */
-/*   Updated: 2016/03/18 19:23:20 by alallema         ###   ########.fr       */
+/*   Updated: 2016/03/18 19:49:43 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*ft_clean(char *s)
 	int i;
 
 	i = 0;
+	s = ft_strdup(s);
 	while (s[i] && s[i] != '\n')
 		i++;
 	while (s[i])
@@ -33,6 +34,7 @@ char	*ft_strcchr(char *s)
 	int i;
 
 	i = 0;
+	s = ft_strdup(s);
 	while(s[i] != '\n' && s[i])
 		i++;
 	i++;
@@ -54,7 +56,7 @@ int	get_next_line(const int fd, char **line)
 	{
 		ft_putchar('t');
 		ft_putchar('\n');
-		*line = ft_strdup(ft_clean(tmp));
+		*line = ft_clean(tmp);
 		tmp = ft_strcchr(tmp);
 		return (1);
 	}
@@ -71,11 +73,11 @@ int	get_next_line(const int fd, char **line)
 		}
 		if (ft_strchr(buf, '\n'))
 		{
-			ft_putstr(buf);
+//			ft_putstr(buf);
 			ft_putchar('b');
 			ft_putchar('\n');
 			*line = ft_strjoin(tmp, ft_clean(buf));
-			tmp = ft_strdup(ft_strcchr(buf));
+			tmp = ft_strcchr(buf);
 //			ft_putstr(tmp);
 			return (1);
 		}
