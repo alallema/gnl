@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/09 17:59:29 by alallema          #+#    #+#             */
-/*   Updated: 2016/04/07 19:25:06 by alallema         ###   ########.fr       */
+/*   Created: 2015/11/24 16:47:33 by alallema          #+#    #+#             */
+/*   Updated: 2015/12/02 17:59:06 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <string.h>
 
-# include "libft/includes/libft.h"
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
+void		*ft_memccpy(void *dest, const void *src, int c, size_t n)
+{
+	char	*dest2;
+	char	*src2;
+	size_t	i;
 
-# define BUFF_SIZE	1
-
-int	get_next_line(const	int fd, char	**line);
-
-#endif
+	i = 0;
+	if (n == 0 || !src || !dest)
+		return (NULL);
+	dest2 = (char *)dest;
+	src2 = (char *)src;
+	while (i < n)
+	{
+		dest2[i] = src2[i];
+		if (dest2[i] == (char)c)
+			return ((void *)&dest2[i + 1]);
+		i++;
+	}
+	return (NULL);
+}

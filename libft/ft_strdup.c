@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/09 17:59:29 by alallema          #+#    #+#             */
-/*   Updated: 2016/04/07 19:25:06 by alallema         ###   ########.fr       */
+/*   Created: 2015/11/24 16:54:42 by alallema          #+#    #+#             */
+/*   Updated: 2016/04/07 15:46:33 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <stdlib.h>
+#include <string.h>
+#include "libft.h"
 
-# include "libft/includes/libft.h"
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
+char		*ft_strdup(const char *src)
+{
+	char	*dest;
+	int		len;
 
-# define BUFF_SIZE	1
-
-int	get_next_line(const	int fd, char	**line);
-
-#endif
+	len = 0;
+	while (src[len])
+		len++;
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (dest == NULL)
+		return (NULL);
+	dest[len + 1] = '\0';
+	while (len > 0)
+	{
+		dest[len] = src[len];
+		len--;
+	}
+	dest[0] = src[0];
+	return (&dest[len]);
+}

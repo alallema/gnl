@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/09 17:59:29 by alallema          #+#    #+#             */
-/*   Updated: 2016/04/07 19:25:06 by alallema         ###   ########.fr       */
+/*   Created: 2015/11/24 17:53:08 by alallema          #+#    #+#             */
+/*   Updated: 2016/04/07 18:17:55 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/includes/libft.h"
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
+char		*ft_strjoin(char *s1, char *s2)
+{
+	int		len;
+	int		i;
+	char	*str;
 
-# define BUFF_SIZE	1
-
-int	get_next_line(const	int fd, char	**line);
-
-#endif
+	i = 0;
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	len = (ft_strlen(s1) + ft_strlen(s2));
+	str = ft_strnew((size_t)len + 1);
+	if (str == NULL)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (*s2)
+	{
+		str[i] = *s2;
+		i++;
+		s2++;
+	}
+	str[i] = '\0';
+	return (str);
+}

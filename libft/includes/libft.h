@@ -6,7 +6,7 @@
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 14:53:44 by alallema          #+#    #+#             */
-/*   Updated: 2016/03/12 18:15:34 by alallema         ###   ########.fr       */
+/*   Updated: 2016/04/07 15:46:52 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
@@ -81,6 +81,5 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-void				ft_lstpushback(t_list **begin_list, void const *content, size_t content_size);
 
 #endif

@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/09 17:59:29 by alallema          #+#    #+#             */
-/*   Updated: 2016/04/07 19:25:06 by alallema         ###   ########.fr       */
+/*   Created: 2015/11/24 16:53:55 by alallema          #+#    #+#             */
+/*   Updated: 2015/11/27 11:15:46 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <string.h>
 
-# include "libft/includes/libft.h"
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
+char	*ft_strstr(const char *str, const char *to_find)
+{
+	int i;
+	int j;
 
-# define BUFF_SIZE	1
-
-int	get_next_line(const	int fd, char	**line);
-
-#endif
+	i = 0;
+	j = 0;
+	if (to_find[0] == '\0')
+		return ((char *)str);
+	while (str[i])
+	{
+		while (str[i] == to_find[j] || to_find[j] == '\0')
+		{
+			i++;
+			j++;
+			if (to_find[j] == '\0')
+				return ((char *)&str[i - j]);
+		}
+		i++;
+	}
+	return (NULL);
+}
