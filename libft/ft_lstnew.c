@@ -6,13 +6,13 @@
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 19:25:07 by alallema          #+#    #+#             */
-/*   Updated: 2015/12/02 11:22:23 by alallema         ###   ########.fr       */
+/*   Updated: 2016/04/13 14:16:52 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_list	*ft_lstnew(void const *content, size_t content_size, int i)
 {
 	t_list *elem;
 
@@ -23,6 +23,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	{
 		elem->content = NULL;
 		elem->content_size = 0;
+		elem->i = 0;
 	}
 	else
 	{
@@ -31,6 +32,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 			return (NULL);
 		ft_memcpy(elem->content, content, content_size);
 		elem->content_size = content_size;
+		elem->i = i;
 	}
 	elem->next = NULL;
 	return (elem);

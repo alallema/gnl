@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alallema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 17:53:08 by alallema          #+#    #+#             */
-/*   Updated: 2016/04/13 17:57:01 by alallema         ###   ########.fr       */
+/*   Created: 2016/04/15 13:46:51 by alallema          #+#    #+#             */
+/*   Updated: 2016/04/15 15:13:01 by alallema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strjoin(char *s1, char *s2)
+void		ft_lstclear(t_list **begin_list)
 {
-	int		len;
-	int		i;
-	char	*str;
+	t_list	*tmp;
+	t_list	*list;
 
-	i = 0;
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	len = (ft_strlen(s1) + ft_strlen(s2));
-	str = ft_strnew((size_t)len + 1);
-	if (str == NULL)
-		return (NULL);
-	while (s1[i])
+	list = *begin_list;
+	tmp = NULL;
+	while (list)
 	{
-		str[i] = s1[i];
-		i++;
+		if (list->next)
+			tmp = list->next;
+		else
+			tmp = NULL;
+		free(list);
+		list = tmp;
 	}
-	while (*s2)
-	{
-		str[i] = *s2;
-		i++;
-		s2++;
-	}
-	str[i] = '\0';
-	return (str);
 }
